@@ -11,11 +11,13 @@ class ShippingSection extends StatefulWidget {
   State<ShippingSection> createState() => _ShippingSectionState();
 }
 
-class _ShippingSectionState extends State<ShippingSection> {
+class _ShippingSectionState extends State<ShippingSection>
+    with AutomaticKeepAliveClientMixin {
   bool? _payWithCash;
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     var orderEntity = context.read<OrderEntity>();
     var price = orderEntity.cartEntity.calcTotalPrice();
     return Column(
@@ -48,4 +50,7 @@ class _ShippingSectionState extends State<ShippingSection> {
       ],
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }
