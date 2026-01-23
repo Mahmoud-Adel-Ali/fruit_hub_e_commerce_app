@@ -16,7 +16,8 @@ class _ShippingSectionState extends State<ShippingSection> {
 
   @override
   Widget build(BuildContext context) {
-    var price = context.read<OrderEntity>().cartEntity.calcTotalPrice();
+    var orderEntity = context.read<OrderEntity>();
+    var price = orderEntity.cartEntity.calcTotalPrice();
     return Column(
       children: [
         SizedBox(height: 16),
@@ -27,6 +28,7 @@ class _ShippingSectionState extends State<ShippingSection> {
           isSelected: _payWithCash == true,
           onTap: () {
             _payWithCash = true;
+            orderEntity.payWithCash = true;
             setState(() {});
           },
         ),
@@ -39,6 +41,7 @@ class _ShippingSectionState extends State<ShippingSection> {
           isSelected: _payWithCash == false,
           onTap: () {
             _payWithCash = false;
+            orderEntity.payWithCash = false;
             setState(() {});
           },
         ),
