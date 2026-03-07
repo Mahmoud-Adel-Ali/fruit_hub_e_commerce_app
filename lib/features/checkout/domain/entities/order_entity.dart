@@ -4,11 +4,18 @@ import 'shipping_address_entity.dart';
 class OrderEntity {
   final CartEntity cartEntity;
   bool? payWithCash;
-  ShippingAddressEntity? shippingAddress;
+  ShippingAddressEntity shippingAddress;
 
   OrderEntity({
     required this.cartEntity,
+    required this.shippingAddress,
     this.payWithCash,
-    this.shippingAddress,
   });
+
+  // to json
+  Map<String, dynamic> toJson() => <String, dynamic>{
+    // 'cartEntity': cartEntity.toJson(),
+    'shippingAddress': shippingAddress.toJson(),
+    'payWithCash': payWithCash,
+  };
 }

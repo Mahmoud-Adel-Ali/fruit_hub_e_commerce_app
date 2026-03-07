@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -30,6 +32,7 @@ class CheckoutSteps extends StatelessWidget {
             isActive: index <= currentStep,
             onTap: () {
               var order = context.read<OrderEntity>();
+              log("Order data : ${order.toJson()}");
               var payWithCash = order.payWithCash;
               if (payWithCash == null && index > 0) {
                 ToastHelper.showErrorToast('يرجى اختيار طريقة الدفع');

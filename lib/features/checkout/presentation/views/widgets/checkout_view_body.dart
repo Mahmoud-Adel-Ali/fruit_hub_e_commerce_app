@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:fruit_hub_e_commerce_app/core/widgets/custom_button.dart';
 import 'package:provider/provider.dart';
@@ -99,5 +101,16 @@ class _CheckoutViewBodyState extends State<CheckoutViewBody> {
     }
   }
 
-  void _handleAddressValidation(BuildContext context) {}
+  void _handleAddressValidation(BuildContext context) {
+    log(
+      "Address data : ${context.read<OrderEntity>().shippingAddress.toJson()}",
+    );
+    if (_formKey.currentState!.validate()) {
+      _formKey.currentState!.save();
+      _pageController.nextPage(
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.easeInOut,
+      );
+    }
+  }
 }

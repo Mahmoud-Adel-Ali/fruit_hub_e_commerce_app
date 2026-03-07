@@ -5,8 +5,9 @@ import '../utils/app_colors.dart';
 import 'custom_text_form_field.dart';
 
 class CustomNameTextFormField extends StatefulWidget {
-  const CustomNameTextFormField({super.key, this.controller});
+  const CustomNameTextFormField({super.key, this.controller, this.onChanged});
   final TextEditingController? controller;
+  final Function(String)? onChanged;
 
   @override
   State<CustomNameTextFormField> createState() =>
@@ -24,6 +25,7 @@ class _CustomNameTextFormFieldState extends State<CustomNameTextFormField> {
       validator: (value) => validatorOfUserName(value),
       onChanged: (value) {
         validName = validatorOfUserNameBool(value);
+        widget.onChanged?.call(value);
         setState(() {});
       },
       suffixIcon: validName

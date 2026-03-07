@@ -5,8 +5,9 @@ import '../utils/app_colors.dart';
 import 'custom_text_form_field.dart';
 
 class CustomEmailTextFormField extends StatefulWidget {
-  const CustomEmailTextFormField({super.key, this.controller});
+  const CustomEmailTextFormField({super.key, this.controller, this.onChanged});
   final TextEditingController? controller;
+  final Function(String)? onChanged;
 
   @override
   State<CustomEmailTextFormField> createState() =>
@@ -32,6 +33,7 @@ class _CustomEmailTextFormFieldState extends State<CustomEmailTextFormField> {
           : null,
       onChanged: (value) {
         validEmail = validatorOfEmailBool(value);
+        widget.onChanged?.call(value);
         setState(() {});
       },
     );

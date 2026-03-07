@@ -9,9 +9,11 @@ class CustomPhoneTextFormField extends StatefulWidget {
     super.key,
     this.hintText = 'رقم الهاتف',
     this.controller,
+    this.onChanged,
   });
   final String hintText;
   final TextEditingController? controller;
+  final Function(String)? onChanged;
 
   @override
   State<CustomPhoneTextFormField> createState() =>
@@ -30,6 +32,7 @@ class _CustomPhoneTextFormFieldState extends State<CustomPhoneTextFormField> {
       validator: validatorOfEgyptianPhone,
       onChanged: (value) {
         isValid = validatorOfEgyptianPhoneBool(value);
+        widget.onChanged?.call(value);
         setState(() {});
       },
       prefixIcon: Icon(
