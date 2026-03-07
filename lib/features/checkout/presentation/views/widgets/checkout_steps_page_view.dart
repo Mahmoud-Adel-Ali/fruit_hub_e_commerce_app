@@ -8,10 +8,11 @@ class CheckoutStepsPageView extends StatelessWidget {
   const CheckoutStepsPageView({
     super.key,
     required PageController pageController,
+    required this.formKey,
   }) : _pageController = pageController;
 
   final PageController _pageController;
-
+  final GlobalKey<FormState> formKey;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -25,10 +26,10 @@ class CheckoutStepsPageView extends StatelessWidget {
     );
   }
 
-  List<Widget> pages() => const [
-    ShippingSection(),
-    AddressInputSection(),
-    PaymentSection(),
+  List<Widget> pages() => [
+    const ShippingSection(),
+    AddressInputSection(formKey: formKey),
+    const PaymentSection(),
     // SizedBox(), // Review Section Placeholder
   ];
 }

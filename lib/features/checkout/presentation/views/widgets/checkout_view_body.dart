@@ -18,6 +18,7 @@ class CheckoutViewBody extends StatefulWidget {
 class _CheckoutViewBodyState extends State<CheckoutViewBody> {
   late PageController _pageController;
   int currentStep = 0;
+  final _formKey = GlobalKey<FormState>();
 
   @override
   void initState() {
@@ -50,24 +51,19 @@ class _CheckoutViewBodyState extends State<CheckoutViewBody> {
             pageController: _pageController,
           ),
           Expanded(
-            child: CheckoutStepsPageView(pageController: _pageController),
+            child: CheckoutStepsPageView(
+              pageController: _pageController,
+              formKey: _formKey,
+            ),
           ),
           SizedBox(height: 16),
           CustomButton(
             text: getNextButtonText(currentStep),
             onPressed: () {
-              var order = context.read<OrderEntity>();
-              var payWithCash = order.payWithCash;
-              if (payWithCash == null) {
-                ToastHelper.showErrorToast('يرجى اختيار طريقة الدفع');
-                return;
-              }
-
-              if (currentStep < steps.length - 1) {
-                _pageController.nextPage(
-                  duration: const Duration(milliseconds: 300),
-                  curve: Curves.easeInOut,
-                );
+              if (currentStep == 0) {
+                _handleShippingSectionValidation(context);
+              } else if (currentStep == 1) {
+                _handleAddressValidation(context);
               }
             },
           ),
@@ -75,6 +71,19 @@ class _CheckoutViewBodyState extends State<CheckoutViewBody> {
         ],
       ),
     );
+  }
+
+  void _handleShippingSectionValidation(BuildContext context) {
+    var order = context.read<OrderEntity>();
+    var payWithCash = order.payWithCash;
+    if (payWithCash != null) {
+      _pageController.nextPage(
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.easeInOut,
+      );
+    } else {
+      ToastHelper.showErrorToast('يرجى اختيار طريقة الدفع');
+    }
   }
 
   String getNextButtonText(int currentStep) {
@@ -89,4 +98,6 @@ class _CheckoutViewBodyState extends State<CheckoutViewBody> {
         return 'التالي';
     }
   }
+
+  void _handleAddressValidation(BuildContext context) {}
 }

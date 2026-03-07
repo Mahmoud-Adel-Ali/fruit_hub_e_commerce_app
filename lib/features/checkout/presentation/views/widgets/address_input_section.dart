@@ -10,11 +10,14 @@ import '../../../../../core/widgets/custom_phone_text_form_field.dart';
 import '../../../../../core/widgets/custom_toggel_widget.dart';
 
 class AddressInputSection extends StatelessWidget {
-  const AddressInputSection({super.key});
+  const AddressInputSection({super.key, required this.formKey});
+
+  final GlobalKey<FormState> formKey;
 
   @override
   Widget build(BuildContext context) {
     return Form(
+      key: formKey,
       child: Column(
         spacing: 12,
         children: [
