@@ -7,22 +7,32 @@ import '../../domain/entities/order_entity.dart';
 import '../../domain/entities/shipping_address_entity.dart';
 import 'widgets/checkout_view_body.dart';
 
-class CheckoutView extends StatelessWidget {
+class CheckoutView extends StatefulWidget {
   const CheckoutView({super.key, required this.cartEntity});
   static const String routeName = 'checkout_view';
   final CartEntity cartEntity;
 
   @override
+  State<CheckoutView> createState() => _CheckoutViewState();
+}
+
+class _CheckoutViewState extends State<CheckoutView> {
+  late OrderEntity orderEntity;
+
+  @override
+  void initState() {
+    super.initState();
+    orderEntity = OrderEntity(
+      cartEntity: widget.cartEntity,
+      shippingAddress: ShippingAddressEntity(),
+    );
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: customAppBar(context, title: 'الشحن', showNotifications: false),
-      body: Provider.value(
-        value: OrderEntity(
-          cartEntity: cartEntity,
-          shippingAddress: ShippingAddressEntity(),
-        ),
-        child: const CheckoutViewBody(),
-      ),
+      body: Provider.value(value: orderEntity, child: const CheckoutViewBody()),
     );
   }
 }

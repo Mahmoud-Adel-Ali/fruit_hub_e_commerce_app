@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fruit_hub_e_commerce_app/core/widgets/custom_email_text_form_field.dart';
@@ -8,7 +6,6 @@ import 'package:fruit_hub_e_commerce_app/core/widgets/custom_text_form_field.dar
 import '../../../../../core/helper_functions/validation_of_input_fields.dart';
 import '../../../../../core/widgets/custom_name_text_form_field.dart';
 import '../../../../../core/widgets/custom_phone_text_form_field.dart';
-import '../../../../../core/widgets/custom_toggel_widget.dart';
 import '../../../domain/entities/order_entity.dart';
 
 class AddressInputSection extends StatelessWidget {
@@ -50,6 +47,16 @@ class AddressInputSection extends StatelessWidget {
               },
             ),
             CustomTextFormField(
+              hintText: 'المدينة',
+              validator: simpleValidator,
+              controller: TextEditingController(
+                text: order.shippingAddress.city,
+              ),
+              onChanged: (value) {
+                order.shippingAddress.city = value;
+              },
+            ),
+            CustomTextFormField(
               hintText: 'العنوان',
               validator: simpleValidator,
               controller: TextEditingController(
@@ -60,7 +67,7 @@ class AddressInputSection extends StatelessWidget {
               },
             ),
             CustomTextFormField(
-              hintText: 'رقم الطابق , رقم الشقه ..',
+              hintText: 'عنوان اضافي',
               validator: simpleValidator,
               controller: TextEditingController(
                 text: order.shippingAddress.addressDetails,
@@ -69,13 +76,23 @@ class AddressInputSection extends StatelessWidget {
                 order.shippingAddress.addressDetails = value;
               },
             ),
-            CustomToggleWidget(
-              title: "حفظ العنوان",
-              initialValue: true,
+            CustomTextFormField(
+              hintText: 'رقم الطابق , رقم الشقه ..',
+              validator: simpleValidator,
+              controller: TextEditingController(
+                text: order.shippingAddress.floor,
+              ),
               onChanged: (value) {
-                log(value.toString());
+                order.shippingAddress.floor = value;
               },
             ),
+            // CustomToggleWidget(
+            //   title: "حفظ العنوان",
+            //   initialValue: true,
+            //   onChanged: (value) {
+            //     log(value.toString());
+            //   },
+            // ),
           ],
         ),
       ),

@@ -29,7 +29,7 @@ class CheckoutStepsPageView extends StatelessWidget {
   List<Widget> pages() => [
     const ShippingSection(),
     AddressInputSection(formKey: formKey),
-    const PaymentSection(),
+    PaymentSection(pageController: _pageController),
     // SizedBox(), // Review Section Placeholder
   ];
 }

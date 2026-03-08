@@ -7,6 +7,7 @@ class ShippingAddressEntity {
   String city;
   String address;
   String addressDetails;
+  String floor;
 
   ShippingAddressEntity({
     this.name = '',
@@ -15,6 +16,7 @@ class ShippingAddressEntity {
     this.city = '',
     this.address = '',
     this.addressDetails = '',
+    this.floor = '',
   });
 
   Map<String, dynamic> toJson() {
@@ -25,6 +27,7 @@ class ShippingAddressEntity {
       'city': city,
       'address': address,
       'addressDetails': addressDetails,
+      'floor': floor,
     };
   }
 
@@ -36,6 +39,9 @@ class ShippingAddressEntity {
       city: json['city'] as String,
       address: json['address'] as String,
       addressDetails: json['addressDetails'] as String,
+      floor: json['floor'] as String,
     );
   }
+
+  String get fullAddress => '$city - $address - $addressDetails - $floor';
 }
