@@ -19,29 +19,5 @@ class ShippingAddressEntity {
     this.floor = '',
   });
 
-  Map<String, dynamic> toJson() {
-    return <String, dynamic>{
-      'name': name,
-      'phone': phone,
-      'email': email,
-      'city': city,
-      'address': address,
-      'addressDetails': addressDetails,
-      'floor': floor,
-    };
-  }
-
-  factory ShippingAddressEntity.fromJson(Map<String, dynamic> json) {
-    return ShippingAddressEntity(
-      name: json['name'] as String,
-      phone: json['phone'] as String,
-      email: json['email'] as String,
-      city: json['city'] as String,
-      address: json['address'] as String,
-      addressDetails: json['addressDetails'] as String,
-      floor: json['floor'] as String,
-    );
-  }
-
   String get fullAddress => '$city - $address - $addressDetails - $floor';
 }
