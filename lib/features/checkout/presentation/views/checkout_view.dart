@@ -10,6 +10,7 @@ import '../../../cart/domain/entities/cart_entity.dart';
 import '../../domain/entities/order_entity.dart';
 import '../../domain/entities/shipping_address_entity.dart';
 import '../manager/add_order_cubit.dart/add_order_cubit.dart';
+import 'widgets/add_order_cubit_bloc_consumer.dart';
 import 'widgets/checkout_view_body.dart';
 
 class CheckoutView extends StatefulWidget {
@@ -42,7 +43,7 @@ class _CheckoutViewState extends State<CheckoutView> {
         appBar: customAppBar(context, title: 'الشحن', showNotifications: false),
         body: Provider.value(
           value: orderEntity,
-          child: const CheckoutViewBody(),
+          child: const AddOrderCubitBlocConsumer(child: CheckoutViewBody()),
         ),
       ),
     );

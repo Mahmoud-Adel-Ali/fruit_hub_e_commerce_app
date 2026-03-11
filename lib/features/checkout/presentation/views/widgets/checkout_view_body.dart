@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import '../../../../../constants.dart';
 import '../../../../../core/widgets/toast_helper.dart';
 import '../../../domain/entities/order_entity.dart';
+import '../../manager/add_order_cubit.dart/add_order_cubit.dart';
 import 'checkout_steps.dart';
 import 'checkout_steps_page_view.dart';
 
@@ -64,6 +65,9 @@ class _CheckoutViewBodyState extends State<CheckoutViewBody> {
                 _handleShippingSectionValidation(context);
               } else if (currentStep == 1) {
                 _handleAddressValidation(context);
+              } else {
+                var order = context.read<OrderEntity>();
+                context.read<AddOrderCubit>().addOrder(order: order);
               }
             },
           ),
