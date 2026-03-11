@@ -46,7 +46,7 @@ class OrderModel {
     orderProducts: orderEntity.cartEntity.cartItems
         .map((x) => OrderProductModel.fromEntity(x))
         .toList(),
-    paymentMethod: orderEntity.payWithCash == true ? 'Cash' : 'Paymob',
+    paymentMethod: orderEntity.payWithCash == true ? 'Cash' : 'Paypal',
   );
 }
 
