@@ -13,4 +13,24 @@ class OrderEntity {
     required this.shippingAddress,
     this.payWithCash,
   });
+
+  int calcShippingCost() {
+    if (payWithCash == true) {
+      return 20;
+    } else {
+      return 0;
+    }
+  }
+
+  double calcShippingDiscount() {
+    return 0;
+  }
+
+  double calcTotalPriceAfterDiscountAndShipping() {
+    return cartEntity.calcTotalPrice() +
+        calcShippingCost() -
+        calcShippingDiscount();
+  }
+
+  String get currency => "EG";
 }
