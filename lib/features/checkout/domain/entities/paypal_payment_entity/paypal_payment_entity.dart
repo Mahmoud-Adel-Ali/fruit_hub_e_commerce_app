@@ -1,3 +1,4 @@
+import '../order_entity.dart';
 import 'amount.dart';
 import 'item_list.dart';
 
@@ -13,4 +14,12 @@ class PaypalPaymentEntity {
     'description': description,
     'item_list': itemList?.toJson(),
   };
+
+  factory PaypalPaymentEntity.fromEntity(OrderEntity order) {
+    return PaypalPaymentEntity(
+      amount: AmountEntity.fromEntity(order),
+      description: "",
+      itemList: ItemList.fromEntity(order.cartEntity.cartItems),
+    );
+  }
 }

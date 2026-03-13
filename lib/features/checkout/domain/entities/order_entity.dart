@@ -31,6 +31,4 @@ class OrderEntity {
         calcShippingCost() -
         calcShippingDiscount();
   }
-
-  String get currency => "EG";
 }

@@ -1,3 +1,4 @@
+import '../../../../../core/helper_functions/get_currency.dart';
 import '../order_entity.dart';
 import 'details.dart';
 
@@ -17,7 +18,7 @@ class AmountEntity {
   factory AmountEntity.fromEntity(OrderEntity order) {
     return AmountEntity(
       total: order.calcTotalPriceAfterDiscountAndShipping().toString(),
-      currency: order.currency,
+      currency: getCurrency(),
       details: DetailsEntity.fromEntity(order),
     );
   }
