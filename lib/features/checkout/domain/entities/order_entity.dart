@@ -16,9 +16,9 @@ class OrderEntity {
 
   int calcShippingCost() {
     if (payWithCash == true) {
-      return 20;
-    } else {
       return 0;
+    } else {
+      return 20;
     }
   }
 

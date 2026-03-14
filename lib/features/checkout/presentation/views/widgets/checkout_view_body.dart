@@ -132,11 +132,16 @@ class _CheckoutViewBodyState extends State<CheckoutViewBody> {
           transactions: [paymentTransaction.toJson()],
           note: "Contact us for any questions on your order.",
           onSuccess: (Map params) async {
+            Navigator.pop(context);
             debugPrint("onSuccess: $params");
+
+            ToastHelper.showSuccessToast("تم الدفع بنجاح");
           },
           onError: (error) {
-            debugPrint("onError: $error");
+            log("onError: ${error.toString()}");
             Navigator.pop(context);
+
+            ToastHelper.showErrorToast("حدث خطأ في الدفع");
           },
           onCancel: () {
             debugPrint('cancelled:');
