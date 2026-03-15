@@ -21,6 +21,7 @@ class OrderModel {
     return <String, dynamic>{
       'totalPrice': totalPrice,
       'uId': uId,
+      'status': 'pending',
       'shippingAddress': shippingAddress.toJson(),
       'orderProducts': orderProducts.map((x) => x.toJson()).toList(),
       'paymentMethod': paymentMethod,

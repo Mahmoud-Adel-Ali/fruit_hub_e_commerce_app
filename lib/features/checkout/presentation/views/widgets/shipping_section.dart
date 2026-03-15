@@ -26,7 +26,7 @@ class _ShippingSectionState extends State<ShippingSection>
         ShippingItem(
           title: 'الدفع عند الاستلام',
           subtitle: 'التسليم من المكان',
-          trillingText: '${price + 20} جنيه',
+          trillingText: '$price  جنيه',
           isSelected: _payWithCash == true,
           onTap: () {
             _payWithCash = true;
@@ -38,7 +38,7 @@ class _ShippingSectionState extends State<ShippingSection>
         ShippingItem(
           title: 'الدفع عبر الإنترنت',
           subtitle: 'بطاقة الائتمان أو الخصم',
-          trillingText: '$price جنيه',
+          trillingText: '${price + 20} جنيه',
           // trillingText: 'مجاني',
           isSelected: _payWithCash == false,
           onTap: () {

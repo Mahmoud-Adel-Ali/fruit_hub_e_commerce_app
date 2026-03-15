@@ -10,6 +10,7 @@ import '../../../../../core/utils/paypal_keys.dart';
 import '../../../../../core/widgets/toast_helper.dart';
 import '../../../domain/entities/order_entity.dart';
 import '../../../domain/entities/paypal_payment_entity/paypal_payment_entity.dart';
+import '../../manager/add_order_cubit.dart/add_order_cubit.dart';
 import 'checkout_steps.dart';
 import 'checkout_steps_page_view.dart';
 
@@ -70,9 +71,6 @@ class _CheckoutViewBodyState extends State<CheckoutViewBody> {
               } else if (currentStep == 1) {
                 _handleAddressValidation(context);
               } else {
-                // var order = context.read<OrderEntity>();
-                // context.read<AddOrderCubit>().addOrder(order: order);
-
                 _processPyment(context);
               }
             },
@@ -123,6 +121,8 @@ class _CheckoutViewBodyState extends State<CheckoutViewBody> {
     var order = context.read<OrderEntity>();
     var paymentTransaction = PaypalPaymentEntity.fromEntity(order);
     log("Transaction: ${paymentTransaction.toJson()}");
+    var addOrderCubit = context.read<AddOrderCubit>();
+
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (BuildContext context) => PaypalCheckoutView(
@@ -136,6 +136,9 @@ class _CheckoutViewBodyState extends State<CheckoutViewBody> {
             debugPrint("onSuccess: $params");
 
             ToastHelper.showSuccessToast("تم الدفع بنجاح");
+
+            //* Add order to firestore
+            addOrderCubit.addOrder(order: order);
           },
           onError: (error) {
             log("onError: ${error.toString()}");
