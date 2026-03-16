@@ -2,11 +2,11 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_paypal_payment/flutter_paypal_payment.dart';
-import 'package:fruit_hub_e_commerce_app/core/widgets/custom_button.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../../constants.dart';
 import '../../../../../core/utils/paypal_keys.dart';
+import '../../../../../core/widgets/custom_button.dart';
 import '../../../../../core/widgets/toast_helper.dart';
 import '../../../domain/entities/order_entity.dart';
 import '../../../domain/entities/paypal_payment_entity/paypal_payment_entity.dart';
@@ -55,6 +55,11 @@ class _CheckoutViewBodyState extends State<CheckoutViewBody> {
           CheckoutSteps(
             currentStep: currentStep,
             pageController: _pageController,
+            onStepTapped: (index) {
+              if (currentStep >= index) {
+                animateToPage(index);
+              }
+            },
           ),
           Expanded(
             child: CheckoutStepsPageView(
@@ -78,6 +83,14 @@ class _CheckoutViewBodyState extends State<CheckoutViewBody> {
           SizedBox(height: 16),
         ],
       ),
+    );
+  }
+
+  void animateToPage(int index) {
+    _pageController.animateToPage(
+      index,
+      duration: const Duration(milliseconds: 300),
+      curve: Curves.easeInOut,
     );
   }
 

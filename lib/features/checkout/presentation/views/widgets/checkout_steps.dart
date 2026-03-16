@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
-import '../../../../../core/widgets/toast_helper.dart';
-import '../../../domain/entities/order_entity.dart';
 import 'step_item.dart';
 
 List<String> steps = [
@@ -15,9 +12,11 @@ class CheckoutSteps extends StatelessWidget {
     super.key,
     required this.currentStep,
     required this.pageController,
+    required this.onStepTapped,
   });
   final int currentStep;
   final PageController pageController;
+  final ValueChanged<int> onStepTapped;
 
   @override
   Widget build(BuildContext context) {
@@ -29,17 +28,7 @@ class CheckoutSteps extends StatelessWidget {
             index: index,
             isActive: index <= currentStep,
             onTap: () {
-              var order = context.read<OrderEntity>();
-              var payWithCash = order.payWithCash;
-              if (payWithCash == null && index > 0) {
-                ToastHelper.showErrorToast('يرجى اختيار طريقة الدفع');
-                return;
-              }
-              pageController.animateToPage(
-                index,
-                duration: const Duration(milliseconds: 300),
-                curve: Curves.easeInOut,
-              );
+              onStepTapped(index);
             },
           ),
         );
