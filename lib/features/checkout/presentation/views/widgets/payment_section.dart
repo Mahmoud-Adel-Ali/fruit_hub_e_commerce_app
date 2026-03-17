@@ -44,17 +44,21 @@ class PaymentSection extends StatelessWidget {
         PaymentItem(
           title: 'عنوان التوصيل',
           child: Row(
+            spacing: 6,
             children: [
-              const SizedBox(width: 8.0),
+              const SizedBox(),
               Icon(Icons.location_on_outlined, color: AppColors.grey),
-              const SizedBox(width: 8.0),
-              Text(
-                order.shippingAddress.fullAddress,
-                style: AppTextStyles.regular16.copyWith(
-                  color: AppColors.grey.shade500,
+              Expanded(
+                child: Text(
+                  order.shippingAddress.fullAddress,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  textAlign: TextAlign.start,
+                  style: AppTextStyles.regular16.copyWith(
+                    color: AppColors.grey.shade500,
+                  ),
                 ),
               ),
-              const Spacer(),
               TextButton.icon(
                 onPressed: () {
                   pageController.animateToPage(
