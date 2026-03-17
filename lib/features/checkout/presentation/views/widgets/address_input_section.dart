@@ -15,7 +15,7 @@ class AddressInputSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var order = context.read<OrderEntity>();
+    var order = context.read<OrderInputEntity>();
     return SingleChildScrollView(
       child: Form(
         key: formKey,

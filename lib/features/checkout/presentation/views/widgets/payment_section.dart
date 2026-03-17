@@ -13,7 +13,7 @@ class PaymentSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var order = context.read<OrderEntity>();
+    var order = context.read<OrderInputEntity>();
     double shippingPrice = 20.0;
     return Column(
       children: [

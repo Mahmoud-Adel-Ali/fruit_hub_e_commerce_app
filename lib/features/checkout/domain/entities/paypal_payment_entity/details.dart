@@ -13,7 +13,7 @@ class DetailsEntity {
     'shipping_discount': shippingDiscount,
   };
 
-  factory DetailsEntity.fromEntity(OrderEntity order) => DetailsEntity(
+  factory DetailsEntity.fromEntity(OrderInputEntity order) => DetailsEntity(
     subtotal: order.cartEntity.calcTotalPrice().toString(),
     shipping: order.calcShippingCost().toString(),
     shippingDiscount: order.calcShippingDiscount(),

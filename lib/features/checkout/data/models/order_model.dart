@@ -39,7 +39,7 @@ class OrderModel {
     paymentMethod: json['paymentMethod'],
   );
 
-  factory OrderModel.fromEntity(OrderEntity orderEntity) => OrderModel(
+  factory OrderModel.fromEntity(OrderInputEntity orderEntity) => OrderModel(
     totalPrice: orderEntity.cartEntity.calcTotalPrice().toDouble(),
     uId: orderEntity.uId,
     shippingAddress: ShippingAddressModel.fromEntity(

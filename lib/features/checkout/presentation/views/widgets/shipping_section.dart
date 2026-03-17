@@ -18,7 +18,7 @@ class _ShippingSectionState extends State<ShippingSection>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    var orderEntity = context.read<OrderEntity>();
+    var orderEntity = context.read<OrderInputEntity>();
     var price = orderEntity.cartEntity.calcTotalPrice();
     return Column(
       children: [

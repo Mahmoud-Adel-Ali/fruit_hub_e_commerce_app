@@ -13,7 +13,9 @@ class OrdersRepoImpl implements OrdersRepo {
   OrdersRepoImpl({required this.service});
 
   @override
-  Future<Either<Failure, void>> addOrder({required OrderEntity order}) async {
+  Future<Either<Failure, void>> addOrder({
+    required OrderInputEntity order,
+  }) async {
     try {
       await service.addData(
         path: EndPoints.addOrders,

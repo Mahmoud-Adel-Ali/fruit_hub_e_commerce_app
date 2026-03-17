@@ -95,7 +95,7 @@ class _CheckoutViewBodyState extends State<CheckoutViewBody> {
   }
 
   void _handleShippingSectionValidation(BuildContext context) {
-    var order = context.read<OrderEntity>();
+    var order = context.read<OrderInputEntity>();
     var payWithCash = order.payWithCash;
     if (payWithCash != null) {
       _pageController.nextPage(
@@ -131,7 +131,7 @@ class _CheckoutViewBodyState extends State<CheckoutViewBody> {
   }
 
   void _processPyment(BuildContext context) {
-    var order = context.read<OrderEntity>();
+    var order = context.read<OrderInputEntity>();
     var paymentTransaction = PaypalPaymentEntity.fromEntity(order);
     log("Transaction: ${paymentTransaction.toJson()}");
     var addOrderCubit = context.read<AddOrderCubit>();

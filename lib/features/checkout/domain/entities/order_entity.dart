@@ -1,13 +1,13 @@
 import '../../../cart/domain/entities/cart_entity.dart';
 import 'shipping_address_entity.dart';
 
-class OrderEntity {
+class OrderInputEntity {
   final String uId;
   final CartEntity cartEntity;
   bool? payWithCash;
   ShippingAddressEntity shippingAddress;
 
-  OrderEntity({
+  OrderInputEntity({
     required this.uId,
     required this.cartEntity,
     required this.shippingAddress,

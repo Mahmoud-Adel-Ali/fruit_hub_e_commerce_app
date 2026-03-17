@@ -15,7 +15,7 @@ class PaypalPaymentEntity {
     'item_list': itemList?.toJson(),
   };
 
-  factory PaypalPaymentEntity.fromEntity(OrderEntity order) {
+  factory PaypalPaymentEntity.fromEntity(OrderInputEntity order) {
     return PaypalPaymentEntity(
       amount: AmountEntity.fromEntity(order),
       description: "Payment Description.",
