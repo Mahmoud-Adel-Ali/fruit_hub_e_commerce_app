@@ -17,9 +17,11 @@ class OrdersRepoImpl implements OrdersRepo {
     required OrderInputEntity order,
   }) async {
     try {
+      var model = OrderModel.fromEntity(order);
       await service.addData(
         path: EndPoints.addOrders,
-        data: OrderModel.fromEntity(order).toJson(),
+        documentId: model.orderId,
+        data: model.toJson(),
       );
       return Right(null);
     } catch (e) {
