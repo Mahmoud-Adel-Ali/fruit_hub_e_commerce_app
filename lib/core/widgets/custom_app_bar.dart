@@ -32,7 +32,7 @@ AppBar customAppBar(
               onPressed: () => Navigator.pop(context),
             ),
           )
-        : null,
+        : SizedBox.shrink(),
     title: Text(
       title,
       textAlign: TextAlign.center,

@@ -50,6 +50,8 @@ class Assets {
 
   static const String imagesNotificationIcon = "assets/images/notification_icon.svg";
 
+  static const String imagesOrderCompletedIcon = "assets/images/order_completed_icon.png";
+
   static const String imagesOrdersIcon = "assets/images/orders_icon.svg";
 
   static const String imagesOurInfoIcon = "assets/images/our_info_icon.svg";
