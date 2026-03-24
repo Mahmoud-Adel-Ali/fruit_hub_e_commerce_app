@@ -5,6 +5,9 @@ class CartEntity {
 
   CartEntity({required this.cartItems});
 
+  // Empty cart
+  CartEntity.empty() : cartItems = [];
+
   //* Add item to cart
   void addItemToCart(CartItemEntity cartItem) {
     //* If the item is in the cart, update the quantity

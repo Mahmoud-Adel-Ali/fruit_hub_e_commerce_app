@@ -19,5 +19,8 @@ class ShippingAddressEntity {
     this.floor = '',
   });
 
+  // empty constructor
+  ShippingAddressEntity.empty() : this();
+
   String get fullAddress => '$city - $address - $addressDetails - $floor';
 }

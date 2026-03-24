@@ -31,4 +31,12 @@ class OrderInputEntity {
         calcShippingCost() -
         calcShippingDiscount();
   }
+
+  // empty cart
+  OrderInputEntity.empty()
+    : this(
+        uId: '',
+        cartEntity: CartEntity.empty(),
+        shippingAddress: ShippingAddressEntity.empty(),
+      );
 }

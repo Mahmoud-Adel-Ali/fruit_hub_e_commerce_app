@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/utils/app_colors.dart';
 import '../../../../../core/utils/app_text_styles.dart';
+import '../../../../../core/widgets/custom_note.dart';
 import '../../../domain/entities/order_entity.dart';
 import 'order_info_item.dart';
 import 'payment_item.dart';
@@ -14,7 +15,8 @@ class PaymentSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var order = context.read<OrderInputEntity>();
-    double shippingPrice = 20.0;
+    bool payWithCach = order.payWithCash ?? false;
+    double shippingPrice = payWithCach ? 0.0 : 20.0;
     return Column(
       children: [
         PaymentItem(
@@ -27,7 +29,12 @@ class PaymentSection extends StatelessWidget {
                   title: "المجموع الفرعي :",
                   price: order.cartEntity.calcTotalPrice().toDouble(),
                 ),
-                OrderInfoItem(title: "التوصيل :", price: shippingPrice),
+                payWithCach
+                    ? OrderInfoItem(
+                        title: 'سوف يتم تحديد تكلفه التوصيل عند الدفع',
+                        price: 0.0,
+                      )
+                    : OrderInfoItem(title: "التوصيل :", price: shippingPrice),
                 Divider(),
                 OrderInfoItem(
                   title: "الكلي",
@@ -80,6 +87,15 @@ class PaymentSection extends StatelessWidget {
             ],
           ),
         ),
+        if (payWithCach) ...[
+          const SizedBox(height: 16),
+          const Divider(),
+          const SizedBox(height: 16),
+          CustomNote(
+            note:
+                'عند اختيار الدفع عند الاستلام، سيتم احتساب تكلفة التوصيل مع إجمالي الطلب. رسوم التوصيل تتراوح عادة بين 10 - 25 جنيه حسب المنطقة.',
+          ),
+        ],
       ],
     );
   }

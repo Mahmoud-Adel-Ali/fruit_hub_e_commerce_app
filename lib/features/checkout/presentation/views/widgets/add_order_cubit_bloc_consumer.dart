@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../../core/cubits/cart/cart_cubit.dart';
 import '../../../../../core/widgets/custom_progress_hub.dart';
 import '../../../../../core/widgets/dialog_helper.dart';
 import '../../../../../core/widgets/toast_helper.dart';
@@ -22,6 +23,8 @@ class AddOrderCubitBlocConsumer extends StatelessWidget {
           );
         } else if (state is AddOrderSuccess) {
           ToastHelper.showSuccessToast('تم اضافة الطلب بنجاح');
+          Navigator.pop(context);
+          context.read<CartCubit>().clearCart();
         }
       },
       builder: (context, state) {

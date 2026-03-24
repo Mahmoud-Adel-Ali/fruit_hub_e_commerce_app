@@ -47,6 +47,8 @@ class _CheckoutViewBodyState extends State<CheckoutViewBody> {
 
   @override
   Widget build(BuildContext context) {
+    var order = context.read<OrderInputEntity>();
+    bool payWithCach = order.payWithCash ?? false;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: kHorizontalPadding),
       child: Column(
@@ -68,6 +70,7 @@ class _CheckoutViewBodyState extends State<CheckoutViewBody> {
             ),
           ),
           SizedBox(height: 16),
+
           CustomButton(
             text: getNextButtonText(currentStep),
             onPressed: () {
@@ -76,7 +79,11 @@ class _CheckoutViewBodyState extends State<CheckoutViewBody> {
               } else if (currentStep == 1) {
                 _handleAddressValidation(context);
               } else {
-                _processPyment(context);
+                if (payWithCach) {
+                  context.read<AddOrderCubit>().addOrder(order: order);
+                } else {
+                  _processPyment(context);
+                }
               }
             },
           ),
@@ -114,7 +121,8 @@ class _CheckoutViewBodyState extends State<CheckoutViewBody> {
       case 1:
         return 'التالي';
       case 2:
-        return 'أدفع بواسطه PayPal';
+        // return 'أدفع بواسطه PayPal';
+        return 'تأكيد الطلب';
       default:
         return 'التالي';
     }
