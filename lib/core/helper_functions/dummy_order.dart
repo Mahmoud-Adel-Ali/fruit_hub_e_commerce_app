@@ -40,6 +40,7 @@ class DummyOrder {
         floor: "${_random.nextInt(10) + 1}",
       ),
       orderProducts: products,
+      date: "2026-03-21 13:56:57.908282",
     );
   }
 }
