@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 
 import '../../../../../core/enums/order_status.dart';
@@ -74,10 +76,10 @@ class _OrderCartItemState extends State<OrderCartItem> {
   @override
   Widget build(BuildContext context) {
     final steps = buildSteps(widget.order.status);
-
+    final statusColor = widget.order.status.color;
     return Container(
       decoration: BoxDecoration(
-        color: const Color(0xffF5F5F5),
+        color: statusColor.withOpacity(0.05),
         borderRadius: BorderRadius.circular(12),
       ),
       child: Column(
@@ -94,13 +96,10 @@ class _OrderCartItemState extends State<OrderCartItem> {
                   Container(
                     padding: const EdgeInsets.all(12),
                     decoration: BoxDecoration(
-                      color: Colors.green.shade50,
+                      color: statusColor.withOpacity(0.1),
                       shape: BoxShape.circle,
                     ),
-                    child: const Icon(
-                      Icons.inventory_2_outlined,
-                      color: Colors.green,
-                    ),
+                    child: Icon(widget.order.status.icon, color: statusColor),
                   ),
 
                   const SizedBox(width: 8),

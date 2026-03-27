@@ -5,6 +5,7 @@ import '../../../../../core/utils/app_colors.dart';
 import '../../../../../core/utils/app_images.dart';
 import '../../../../../core/utils/app_text_styles.dart';
 import '../../../../../core/widgets/custom_toggel_widget.dart';
+import '../../../../orders/presentation/views/orders_view.dart';
 import '../edit_profile_view.dart';
 import 'profile_button.dart';
 
@@ -33,7 +34,9 @@ class GlobalProfileViewSection extends StatelessWidget {
           ProfileButton(
             svg: Assets.imagesOrdersIcon,
             title: 'طلباتي',
-            onTap: () {},
+            onTap: () {
+              Navigator.pushNamed(context, OrdersView.routeName);
+            },
           ),
           ProfileButton(
             svg: Assets.imagesPaymentCardIcon,

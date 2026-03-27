@@ -44,4 +44,18 @@ extension OrderStatusEx on OrderStatus {
         return Colors.red;
     }
   }
+
+  /// 🔹 Icon
+  IconData get icon {
+    switch (this) {
+      case OrderStatus.pending:
+        return Icons.schedule; // ⏳ waiting
+      case OrderStatus.accepted:
+        return Icons.check_circle_outline; // ✅ accepted
+      case OrderStatus.delivered:
+        return Icons.local_shipping; // 🚚 delivered
+      case OrderStatus.cancelled:
+        return Icons.cancel_outlined; // ❌ cancelled
+    }
+  }
 }
