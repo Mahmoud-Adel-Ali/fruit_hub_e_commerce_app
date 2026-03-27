@@ -11,6 +11,7 @@ class OrderOutputModel {
   final List<OrderProductModel> orderProducts;
   final String paymentMethod;
   final OrderStatus status;
+  final String date;
 
   OrderOutputModel({
     required this.totalPrice,
@@ -20,6 +21,7 @@ class OrderOutputModel {
     required this.orderProducts,
     required this.paymentMethod,
     required this.status,
+    required this.date,
   });
 
   Map<String, dynamic> toJson() {
@@ -46,6 +48,7 @@ class OrderOutputModel {
           json['orderProducts'].map((x) => OrderProductModel.fromJson(x)),
         ),
         paymentMethod: json['paymentMethod'],
+        date: json['date'],
       );
 
   OrderOutputEntity toEntity() => OrderOutputEntity(
@@ -56,6 +59,7 @@ class OrderOutputModel {
     shippingAddress: shippingAddress.toEntity(),
     orderProducts: orderProducts.map((x) => x.toEntity()).toList(),
     paymentMethod: paymentMethod,
+    date: date,
   );
 }
 
