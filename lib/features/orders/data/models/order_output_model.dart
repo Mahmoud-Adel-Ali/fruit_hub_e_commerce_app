@@ -1,24 +1,25 @@
-import 'package:uuid/uuid.dart';
-
-import '../../domain/entities/order_entity.dart';
+import '../../../../core/enums/order_status.dart';
+import '../../domain/entities/order_output_entity.dart';
 import 'order_product_model.dart';
 import 'shipping_address_model.dart';
 
-class OrderInputModel {
-  final String orderId;
+class OrderOutputModel {
   final double totalPrice;
   final String uId;
+  final String orderId;
   final ShippingAddressModel shippingAddress;
   final List<OrderProductModel> orderProducts;
   final String paymentMethod;
+  final OrderStatus status;
 
-  OrderInputModel({
+  OrderOutputModel({
     required this.totalPrice,
     required this.uId,
     required this.orderId,
     required this.shippingAddress,
     required this.orderProducts,
     required this.paymentMethod,
+    required this.status,
   });
 
   Map<String, dynamic> toJson() {
@@ -26,7 +27,7 @@ class OrderInputModel {
       'totalPrice': totalPrice,
       'uId': uId,
       'orderId': orderId,
-      'status': 'pending',
+      'status': status.toJson(),
       'date': DateTime.now().toString(),
       'shippingAddress': shippingAddress.toJson(),
       'orderProducts': orderProducts.map((x) => x.toJson()).toList(),
@@ -34,11 +35,12 @@ class OrderInputModel {
     };
   }
 
-  factory OrderInputModel.fromJson(Map<String, dynamic> json) =>
-      OrderInputModel(
+  factory OrderOutputModel.fromJson(Map<String, dynamic> json) =>
+      OrderOutputModel(
         totalPrice: json['totalPrice'].toDouble(),
         uId: json['uId'],
         orderId: json['orderId'],
+        status: OrderStatusEx.fromJson(json['status']),
         shippingAddress: ShippingAddressModel.fromJson(json['shippingAddress']),
         orderProducts: List<OrderProductModel>.from(
           json['orderProducts'].map((x) => OrderProductModel.fromJson(x)),
@@ -46,19 +48,15 @@ class OrderInputModel {
         paymentMethod: json['paymentMethod'],
       );
 
-  factory OrderInputModel.fromEntity(OrderInputEntity orderEntity) =>
-      OrderInputModel(
-        totalPrice: orderEntity.cartEntity.calcTotalPrice().toDouble(),
-        uId: orderEntity.uId,
-        orderId: Uuid().v4(),
-        shippingAddress: ShippingAddressModel.fromEntity(
-          orderEntity.shippingAddress,
-        ),
-        orderProducts: orderEntity.cartEntity.cartItems
-            .map((x) => OrderProductModel.fromEntity(x))
-            .toList(),
-        paymentMethod: orderEntity.payWithCash == true ? 'Cash' : 'Paypal',
-      );
+  OrderOutputEntity toEntity() => OrderOutputEntity(
+    totalPrice: totalPrice,
+    uId: uId,
+    orderId: orderId,
+    status: status,
+    shippingAddress: shippingAddress.toEntity(),
+    orderProducts: orderProducts.map((x) => x.toEntity()).toList(),
+    paymentMethod: paymentMethod,
+  );
 }
 
 
