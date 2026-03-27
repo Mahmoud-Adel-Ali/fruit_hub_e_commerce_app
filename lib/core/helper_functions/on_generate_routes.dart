@@ -8,6 +8,8 @@ import '../../features/checkout/presentation/views/checkout_view.dart';
 import '../../features/checkout/presentation/views/complete_order_view.dart';
 import '../../features/home/presentation/views/main_view.dart';
 import '../../features/on_boarding/presentation/views/on_boarding_view.dart';
+import '../../features/orders/domain/entities/order_output_entity.dart';
+import '../../features/orders/presentation/views/order_details_view.dart';
 import '../../features/orders/presentation/views/orders_view.dart';
 import '../../features/profile/presentation/view/about_us_view.dart';
 import '../../features/profile/presentation/view/edit_profile_view.dart';
@@ -42,6 +44,9 @@ Route<dynamic> onGenerateRoutes(RouteSettings settings) {
       return MaterialPageRoute(builder: (_) => const EditProfileView());
     case OrdersView.routeName:
       return MaterialPageRoute(builder: (_) => const OrdersView());
+    case OrderDetailsView.routeName:
+      var item = settings.arguments as OrderOutputEntity;
+      return MaterialPageRoute(builder: (_) => OrderDetailsView(order: item));
 
     default:
       return MaterialPageRoute(builder: (_) => const Scaffold());
